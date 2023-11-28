@@ -20,7 +20,6 @@ import com.example.myica.R.string as AppText
 import com.example.myica.common.composable.ActionToolbar
 import com.example.myica.common.ext.smallSpacer
 import com.example.myica.common.ext.toolbarActions
-import com.example.myica.model.Task
 
 //@OptIn(ExperimentalLifecycleComposeApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -54,7 +53,7 @@ fun TasksScreen(
       .fillMaxWidth()
       .fillMaxHeight()) {
       ActionToolbar(
-        title = AppText.tasks,
+        title = AppText.plans,
         modifier = Modifier.toolbarActions(),
         endActionIcon = AppIcon.ic_settings,
         endAction = { viewModel.onSettingsClick(openScreen) }

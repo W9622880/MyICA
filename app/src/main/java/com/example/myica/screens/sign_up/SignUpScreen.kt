@@ -2,10 +2,12 @@ package com.example.myica.screens.sign_up
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -14,6 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.myica.common.composable.*
 import com.example.myica.common.ext.basicButton
 import com.example.myica.common.ext.fieldModifier
+import com.example.myica.common.ext.spacer
 import com.example.myica.R.string as AppText
 
 
@@ -29,7 +32,10 @@ fun SignUpScreen(
     BasicToolbar(AppText.create_account)
 
     Column(
-        modifier = modifier.fillMaxWidth().fillMaxHeight().verticalScroll(rememberScrollState()),
+        modifier = modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -39,6 +45,10 @@ fun SignUpScreen(
 
         BasicButton(AppText.create_account, Modifier.basicButton()) {
             viewModel.onSignUpClick(openAndPopUp)
+        }
+        Spacer(modifier = Modifier.spacer())
+        BasicButton(AppText.back_to_login, Modifier.basicButton()) {
+            viewModel.backToLogin(openAndPopUp)
         }
     }
 }

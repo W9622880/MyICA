@@ -7,6 +7,7 @@ import com.example.myica.model.service.AccountService
 import com.example.myica.model.service.LogService
 import com.example.myica.navigation.LOGIN_SCREEN
 import com.example.myica.navigation.SETTINGS_SCREEN
+import com.example.myica.navigation.TASKS_SCREEN
 import com.example.myica.screens.TodoListViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -48,7 +49,7 @@ class LoginViewModel @Inject constructor(
 
         launchCatching {
             accountService.authenticate(email, password)
-            openAndPopUp(SETTINGS_SCREEN, LOGIN_SCREEN)
+            openAndPopUp(TASKS_SCREEN, LOGIN_SCREEN)
         }
     }
 

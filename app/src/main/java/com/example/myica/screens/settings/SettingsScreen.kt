@@ -67,7 +67,6 @@ fun SettingsScreen(
         } else {
             SignOutCard {
                 viewModel.onSignUpClick(restartApp)
-
             }
             DeleteMyAccountCard {
                 viewModel.onDeleteMyAccountClick(restartApp)
@@ -99,6 +98,7 @@ private fun SignOutCard(signOut: () -> Unit) {
                 DialogConfirmButton(AppText.sign_out) {
                     signOut()
                     showWarningDialog = false
+
                 }
             },
             onDismissRequest = { showWarningDialog = false }

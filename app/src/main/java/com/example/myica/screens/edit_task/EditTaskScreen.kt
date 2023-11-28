@@ -59,7 +59,7 @@ fun EditTaskScreen(
         val fieldModifier = Modifier.fieldModifier()
         BasicField(AppText.title, task.title, viewModel::onTitleChange, fieldModifier)
         BasicField(AppText.description, task.description, viewModel::onDescriptionChange, fieldModifier)
-        BasicField(AppText.url, task.url, viewModel::onUrlChange, fieldModifier)
+        BasicField(AppText.more_details, task.url, viewModel::onUrlChange, fieldModifier)
 
         Spacer(modifier = Modifier.spacer())
         CardEditors(task, viewModel::onDateChange, viewModel::onTimeChange)

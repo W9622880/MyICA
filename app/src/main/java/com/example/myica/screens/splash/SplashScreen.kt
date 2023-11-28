@@ -41,7 +41,6 @@ fun SplashScreen(
     ) {
         if (viewModel.showError.value) {
             Text(text = stringResource(AppText.generic_error))
-
             BasicButton(AppText.try_again, Modifier.basicButton()) {
                 viewModel.onAppStart(
                     openAndPopUp

@@ -7,6 +7,7 @@ import com.example.myica.common.ext.passwordMatches
 import com.example.myica.common.snackbar.SnackbarManager
 import com.example.myica.model.service.AccountService
 import com.example.myica.model.service.LogService
+import com.example.myica.navigation.LOGIN_SCREEN
 import com.example.myica.navigation.SETTINGS_SCREEN
 import com.example.myica.navigation.SIGN_UP_SCREEN
 import com.example.myica.screens.TodoListViewModel
@@ -64,5 +65,11 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
+    fun backToLogin(openScreen: (String, String) -> Unit) {
+
+        launchCatching {
+            openScreen(LOGIN_SCREEN,SIGN_UP_SCREEN)
+        }
+    }
 
 }

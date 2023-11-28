@@ -17,7 +17,7 @@ import com.example.myica.common.ext.contextMenu
 import com.example.myica.common.ext.hasDueDate
 import com.example.myica.common.ext.hasDueTime
 import com.example.myica.model.Task
-import com.example.myica.ui.theme.DarkOrange
+import com.example.myica.theme.DarkOrange
 import java.lang.StringBuilder
 
 @Composable

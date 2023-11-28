@@ -24,7 +24,7 @@ import com.example.myica.screens.settings.SettingsScreen
 import com.example.myica.screens.sign_up.SignUpScreen
 import com.example.myica.screens.splash.SplashScreen
 import com.example.myica.screens.tasks.TasksScreen
-import com.example.myica.ui.theme.TodoListComposeTheme
+import com.example.myica.theme.TodoListComposeTheme
 import kotlinx.coroutines.CoroutineScope
 
 @Composable

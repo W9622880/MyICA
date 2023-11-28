@@ -1,4 +1,4 @@
-package com.example.myica.ui.theme
+package com.example.myica.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

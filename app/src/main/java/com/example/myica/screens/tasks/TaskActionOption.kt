@@ -8,7 +8,6 @@ enum class TaskActionOption(val title: String) {
   companion object {
     fun getByTitle(title: String): TaskActionOption {
       values().forEach { action -> if (title == action.title) return action }
-
       return EditTask
     }
 
