@@ -9,6 +9,7 @@ import com.example.myica.screens.TodoListViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import com.example.myica.model.Plan
+import com.example.myica.model.service.PlanNotificationService
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -60,13 +61,17 @@ class EditPlanViewModel @Inject constructor(
         plan.value = plan.value.copy(priority = newValue)
     }
 
-    fun onDoneClick(popUpScreen: () -> Unit) {
+    fun onDoneClick(popUpScreen: () -> Unit,
+    planNotificationService: PlanNotificationService) {
+
         launchCatching {
             val editedTask = plan.value
             if (editedTask.id.isBlank()) {
                 storageService.save(editedTask)
+                planNotificationService.planCreateNotification()
             } else {
                 storageService.update(editedTask)
+                planNotificationService.planEditNotification()
             }
             popUpScreen()
         }

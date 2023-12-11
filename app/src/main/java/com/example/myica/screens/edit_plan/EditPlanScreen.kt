@@ -1,5 +1,8 @@
 package com.example.myica.screens.edit_plan
 
+import android.Manifest
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -7,7 +10,9 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -25,12 +30,18 @@ import com.example.myica.common.ext.spacer
 import com.example.myica.common.ext.toolbarActions
 import com.example.myica.model.Priority
 import com.example.myica.model.Plan
+import com.example.myica.model.service.PlanNotificationService
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.example.myica.R.drawable as AppIcon
 import com.example.myica.R.string as AppText
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 @ExperimentalMaterialApi
 fun EditPlanScreen(
@@ -42,7 +53,14 @@ fun EditPlanScreen(
     val task by viewModel.plan
 
     LaunchedEffect(Unit) { viewModel.initialize(taskId) }
-
+    val postNotificationPermission=
+        rememberPermissionState(permission = Manifest.permission.POST_NOTIFICATIONS)
+    val planNotificationService= PlanNotificationService(LocalContext.current)
+    LaunchedEffect(key1 = true ){
+        if(!postNotificationPermission.status.isGranted){
+            postNotificationPermission.launchPermissionRequest()
+        }
+    }
     Column(
         modifier = modifier.fillMaxWidth().fillMaxHeight().verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -51,7 +69,7 @@ fun EditPlanScreen(
             title = AppText.edit_plan,
             modifier = Modifier.toolbarActions(),
             endActionIcon = AppIcon.ic_check,
-            endAction = { viewModel.onDoneClick(popUpScreen) }
+            endAction = { viewModel.onDoneClick(popUpScreen,planNotificationService ) }
         )
 
         Spacer(modifier = Modifier.spacer())
@@ -66,6 +84,7 @@ fun EditPlanScreen(
         CardSelectors(task, viewModel::onPriorityChange, viewModel::onFlagToggle)
 
         Spacer(modifier = Modifier.spacer())
+
     }
 }
 
@@ -122,6 +141,29 @@ private fun showTimePicker(activity: AppCompatActivity?, onTimeChange: (Int, Int
     activity?.let {
         picker.show(it.supportFragmentManager, picker.toString())
         picker.addOnPositiveButtonClickListener { onTimeChange(picker.hour, picker.minute) }
+    }
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@ExperimentalMaterialApi
+@Composable
+private fun showNotification(){
+    val postNotificationPermission=
+        rememberPermissionState(permission = Manifest.permission.POST_NOTIFICATIONS)
+    val planNotificationService= PlanNotificationService(LocalContext.current)
+    LaunchedEffect(key1 = true ){
+        if(!postNotificationPermission.status.isGranted){
+            postNotificationPermission.launchPermissionRequest()
+        }
+    }
+    Column {
+        Button(
+            onClick = {
+                planNotificationService.showBasicNotification()
+            }
+        ) {
+            Text(text = "Plan created successfully.")
+        }
     }
 }
 

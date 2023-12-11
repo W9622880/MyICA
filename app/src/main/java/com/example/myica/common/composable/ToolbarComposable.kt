@@ -1,15 +1,23 @@
 package com.example.myica.common.composable
 
+import android.Manifest
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import com.example.myica.model.service.PlanNotificationService
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 
 @Composable
 fun BasicToolbar(@StringRes title: Int) {
@@ -20,6 +28,7 @@ fun BasicToolbar(@StringRes title: Int) {
 }
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun ActionToolbar(
     @StringRes title: Int,

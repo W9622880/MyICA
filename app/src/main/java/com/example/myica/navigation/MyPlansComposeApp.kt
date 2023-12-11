@@ -32,8 +32,12 @@ import kotlinx.coroutines.CoroutineScope
 fun MyPlansComposeApp() {
     TodoListComposeTheme {
         Surface(color = MaterialTheme.colors.background) {
-            val appState = rememberAppState()
 
+
+
+
+
+            val appState = rememberAppState()
             Scaffold(
                 snackbarHost = {
                     SnackbarHost(
