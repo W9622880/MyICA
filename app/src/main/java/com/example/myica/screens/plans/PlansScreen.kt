@@ -1,6 +1,6 @@
 
 
-package com.example.myica.screens.tasks
+package com.example.myica.screens.plans
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
@@ -13,7 +13,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-//import androidx.lifecycle.compose.ExperimentalLifecycleComposeApi
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.myica.R.drawable as AppIcon
 import com.example.myica.R.string as AppText
@@ -25,14 +24,14 @@ import com.example.myica.common.ext.toolbarActions
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 @ExperimentalMaterialApi
-fun TasksScreen(
+fun PlansScreen(
   openScreen: (String) -> Unit,
   modifier: Modifier = Modifier,
-  viewModel: TasksViewModel = hiltViewModel()
+  viewModel: PlansViewModel = hiltViewModel()
 ) {
 
-  val tasks = viewModel
-    .tasks
+  val plans = viewModel
+    .plans
     .collectAsStateWithLifecycle(emptyList())
 
   val options by viewModel.options
@@ -62,17 +61,17 @@ fun TasksScreen(
       Spacer(modifier = Modifier.smallSpacer())
 
       LazyColumn {
-        items(tasks.value, key = { it.id }) { taskItem ->
-          TaskItem(
-            task = taskItem,
+        items(plans.value, key = { it.id }) { taskItem ->
+          PlanItem(
+            plan = taskItem,
             options = options,
             onCheckChange = { viewModel.onTaskCheckChange(taskItem) },
-            onActionClick = { action -> viewModel.onTaskActionClick(openScreen, taskItem, action) }
+            onActionClick = { action -> viewModel.onPlanActionClick(openScreen, taskItem, action) }
           )
         }
       }
     }
   }
 
-  LaunchedEffect(viewModel) { viewModel.loadTaskOptions() }
+  LaunchedEffect(viewModel) { viewModel.loadPlanOptions() }
 }

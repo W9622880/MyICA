@@ -1,16 +1,15 @@
 
 package com.example.myica.model.service
 
-import com.example.myica.model.Task
+import com.example.myica.model.Plan
 import kotlinx.coroutines.flow.Flow
 
 interface StorageService {
-  val tasks: Flow<List<Task>>
+  val plans: Flow<List<Plan>>
 
-  suspend fun getTask(taskId: String): Task?
-
-  suspend fun save(task: Task): String
-  suspend fun update(task: Task)
-  suspend fun delete(taskId: String)
+  suspend fun getPlan(planId: String): Plan?
+  suspend fun save(plan: Plan): String
+  suspend fun update(plan: Plan)
+  suspend fun delete(planId: String)
   suspend fun deleteAllForUser(userId: String)
 }

@@ -1,20 +1,20 @@
-package com.example.myica.screens.tasks
+package com.example.myica.screens.plans
 
-enum class TaskActionOption(val title: String) {
-  EditTask("Edit task"),
+enum class PlanActionOption(val title: String) {
+  EditPlan("Edit plan"),
   ToggleFlag("Toggle flag"),
-  DeleteTask("Delete task");
+  DeletePlan("Delete plan");
 
   companion object {
-    fun getByTitle(title: String): TaskActionOption {
+    fun getByTitle(title: String): PlanActionOption {
       values().forEach { action -> if (title == action.title) return action }
-      return EditTask
+      return EditPlan
     }
 
     fun getOptions(hasEditOption: Boolean): List<String> {
       val options = mutableListOf<String>()
       values().forEach { taskAction ->
-        if (hasEditOption || taskAction != EditTask) {
+        if (hasEditOption || taskAction != EditPlan) {
           options.add(taskAction.title)
         }
       }

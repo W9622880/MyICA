@@ -2,7 +2,7 @@ package com.example.myica.model
 
 import com.google.firebase.firestore.DocumentId
 
-data class Task(
+data class Plan(
     @DocumentId val id: String = "",
     val title: String = "",
     val priority: String = "",

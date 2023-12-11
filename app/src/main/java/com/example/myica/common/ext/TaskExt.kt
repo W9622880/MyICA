@@ -1,11 +1,11 @@
 package com.example.myica.common.ext
 
-import com.example.myica.model.Task
+import com.example.myica.model.Plan
 
-fun Task?.hasDueDate(): Boolean {
+fun Plan?.hasDueDate(): Boolean {
     return this?.dueDate.orEmpty().isNotBlank()
 }
 
-fun Task?.hasDueTime(): Boolean {
+fun Plan?.hasDueTime(): Boolean {
     return this?.dueTime.orEmpty().isNotBlank()
 }

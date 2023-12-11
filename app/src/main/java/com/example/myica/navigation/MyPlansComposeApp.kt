@@ -18,12 +18,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.myica.common.snackbar.SnackbarManager
-import com.example.myica.screens.edit_task.EditTaskScreen
+import com.example.myica.screens.edit_plan.EditPlanScreen
 import com.example.myica.screens.login.LoginScreen
 import com.example.myica.screens.settings.SettingsScreen
 import com.example.myica.screens.sign_up.SignUpScreen
 import com.example.myica.screens.splash.SplashScreen
-import com.example.myica.screens.tasks.TasksScreen
+import com.example.myica.screens.plans.PlansScreen
 import com.example.myica.theme.TodoListComposeTheme
 import kotlinx.coroutines.CoroutineScope
 
@@ -98,15 +98,15 @@ fun NavGraphBuilder.makeItSoGraph(appState: TodoListAppState) {
         SignUpScreen(openAndPopUp = { route, popUp -> appState.navigateAndPopUp(route, popUp) })
     }
 
-    composable(TASKS_SCREEN) { TasksScreen(openScreen = { route -> appState.navigate(route) }) }
+    composable(PLANS_SCREEN) { PlansScreen(openScreen = { route -> appState.navigate(route) }) }
 
     composable(
-        route = "$EDIT_TASK_SCREEN$TASK_ID_ARG",
-        arguments = listOf(navArgument(TASK_ID) { defaultValue = TASK_DEFAULT_ID })
+        route = "$EDIT_PLAN_SCREEN$TASK_ID_ARG",
+        arguments = listOf(navArgument(Plan_ID) { defaultValue = PLAN_DEFULT_ID })
     ) {
-        EditTaskScreen(
+        EditPlanScreen(
             popUpScreen = { appState.popUp() },
-            taskId = it.arguments?.getString(TASK_ID) ?: TASK_DEFAULT_ID
+            taskId = it.arguments?.getString(Plan_ID) ?: PLAN_DEFULT_ID
         )
     }
 }

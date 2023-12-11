@@ -71,6 +71,9 @@ fun SettingsScreen(
             DeleteMyAccountCard {
                 viewModel.onDeleteMyAccountClick(restartApp)
             }
+            /*BackToHome {
+
+            }*/
         }
     }
 }
@@ -135,3 +138,19 @@ private fun DeleteMyAccountCard(deleteMyAccount: () -> Unit) {
         )
     }
 }
+
+@ExperimentalMaterialApi
+@Composable
+private fun BackToHome() {
+    var showWarningDialog by remember { mutableStateOf(false) }
+
+    DangerousCardEditor(
+        title = AppText.delete_my_account,
+        icon = AppIcon.ic_delete_my_account,
+        content = "",
+        modifier = Modifier.card()
+    ) {
+
+    }
+}
+

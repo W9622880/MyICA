@@ -16,7 +16,7 @@ limitations under the License.
 
 package com.example.myica.model.service.impl
 
-import com.example.myica.model.Task
+import com.example.myica.model.Plan
 import com.example.myica.model.service.AccountService
 import com.example.myica.model.service.StorageService
 import com.example.myica.model.service.trace
@@ -36,7 +36,7 @@ class StorageServiceImpl
 constructor(private val firestore: FirebaseFirestore, private val auth: AccountService) :
     StorageService {
 
-  override val tasks: Flow<List<Task>>
+  override val plans: Flow<List<Plan>>
     get() =
       auth.currentUser.flatMapLatest { user ->
         currentCollection(user.id)
@@ -44,19 +44,19 @@ constructor(private val firestore: FirebaseFirestore, private val auth: AccountS
           .map { snapshot -> snapshot.toObjects() }
       }
 
-    override suspend fun getTask(taskId: String): Task? =
-        currentCollection(auth.currentUserId).document(taskId).get().await().toObject()
+    override suspend fun getPlan(planId: String): Plan? =
+        currentCollection(auth.currentUserId).document(planId).get().await().toObject()
 
-    override suspend fun save(task: Task): String =
-        trace(SAVE_TASK_TRACE) { currentCollection(auth.currentUserId).add(task).await().id }
+    override suspend fun save(plan: Plan): String =
+        trace(SAVE_PLAN_TRACE) { currentCollection(auth.currentUserId).add(plan).await().id }
 
-    override suspend fun update(task: Task): Unit =
-        trace(UPDATE_TASK_TRACE) {
-            currentCollection(auth.currentUserId).document(task.id).set(task).await()
+    override suspend fun update(plan: Plan): Unit =
+        trace(UPDATE_PLAN_TRACE) {
+            currentCollection(auth.currentUserId).document(plan.id).set(plan).await()
         }
 
-    override suspend fun delete(taskId: String) {
-        currentCollection(auth.currentUserId).document(taskId).delete().await()
+    override suspend fun delete(planId: String) {
+        currentCollection(auth.currentUserId).document(planId).delete().await()
     }
 
     // TODO: It's not recommended to delete on the client:
@@ -67,12 +67,12 @@ constructor(private val firestore: FirebaseFirestore, private val auth: AccountS
     }
 
     private fun currentCollection(uid: String): CollectionReference =
-        firestore.collection(USER_COLLECTION).document(uid).collection(TASK_COLLECTION)
+        firestore.collection(USER_COLLECTION).document(uid).collection(PLAN_COLLECTION)
 
     companion object {
         private const val USER_COLLECTION = "users"
-        private const val TASK_COLLECTION = "tasks"
-        private const val SAVE_TASK_TRACE = "saveTask"
-        private const val UPDATE_TASK_TRACE = "updateTask"
+        private const val PLAN_COLLECTION = "plans"
+        private const val SAVE_PLAN_TRACE = "savePlan"
+        private const val UPDATE_PLAN_TRACE = "updatePlan"
     }
 }

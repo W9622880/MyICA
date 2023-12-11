@@ -1,4 +1,4 @@
-package com.example.myica.screens.edit_task
+package com.example.myica.screens.edit_plan
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Column
@@ -24,7 +24,7 @@ import com.example.myica.common.ext.fieldModifier
 import com.example.myica.common.ext.spacer
 import com.example.myica.common.ext.toolbarActions
 import com.example.myica.model.Priority
-import com.example.myica.model.Task
+import com.example.myica.model.Plan
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
@@ -33,13 +33,13 @@ import com.example.myica.R.string as AppText
 
 @Composable
 @ExperimentalMaterialApi
-fun EditTaskScreen(
+fun EditPlanScreen(
     popUpScreen: () -> Unit,
     taskId: String,
     modifier: Modifier = Modifier,
-    viewModel: EditTaskViewModel = hiltViewModel()
+    viewModel: EditPlanViewModel = hiltViewModel()
 ) {
-    val task by viewModel.task
+    val task by viewModel.plan
 
     LaunchedEffect(Unit) { viewModel.initialize(taskId) }
 
@@ -48,7 +48,7 @@ fun EditTaskScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ActionToolbar(
-            title = AppText.edit_task,
+            title = AppText.edit_plan,
             modifier = Modifier.toolbarActions(),
             endActionIcon = AppIcon.ic_check,
             endAction = { viewModel.onDoneClick(popUpScreen) }
@@ -72,7 +72,7 @@ fun EditTaskScreen(
 @ExperimentalMaterialApi
 @Composable
 private fun CardEditors(
-    task: Task,
+    task: Plan,
     onDateChange: (Long) -> Unit,
     onTimeChange: (Int, Int) -> Unit
 ) {
@@ -90,7 +90,7 @@ private fun CardEditors(
 @Composable
 @ExperimentalMaterialApi
 private fun CardSelectors(
-    task: Task,
+    task: Plan,
     onPriorityChange: (String) -> Unit,
     onFlagToggle: (String) -> Unit
 ) {

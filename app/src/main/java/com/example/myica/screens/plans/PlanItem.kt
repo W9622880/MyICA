@@ -1,6 +1,6 @@
 
 
-package com.example.myica.screens.tasks
+package com.example.myica.screens.plans
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -16,14 +16,14 @@ import com.example.myica.common.composable.DropdownContextMenu
 import com.example.myica.common.ext.contextMenu
 import com.example.myica.common.ext.hasDueDate
 import com.example.myica.common.ext.hasDueTime
-import com.example.myica.model.Task
+import com.example.myica.model.Plan
 import com.example.myica.theme.DarkOrange
 import java.lang.StringBuilder
 
 @Composable
 @ExperimentalMaterialApi
-fun TaskItem(
-  task: Task,
+fun PlanItem(
+  plan: Plan,
   options: List<String>,
   onCheckChange: () -> Unit,
   onActionClick: (String) -> Unit
@@ -37,19 +37,19 @@ fun TaskItem(
       modifier = Modifier.fillMaxWidth(),
     ) {
       Checkbox(
-        checked = task.completed,
+        checked = plan.completed,
         onCheckedChange = { onCheckChange() },
         modifier = Modifier.padding(8.dp, 0.dp)
       )
 
       Column(modifier = Modifier.weight(1f)) {
-        Text(text = task.title, style = MaterialTheme.typography.subtitle2)
+        Text(text = plan.title, style = MaterialTheme.typography.subtitle2)
         CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-          Text(text = getDueDateAndTime(task), fontSize = 12.sp)
+          Text(text = getDueDateAndTime(plan), fontSize = 12.sp)
         }
       }
 
-      if (task.flag) {
+      if (plan.flag) {
         Icon(
           painter = painterResource(AppIcon.ic_flag),
           tint = DarkOrange,
@@ -62,17 +62,17 @@ fun TaskItem(
   }
 }
 
-private fun getDueDateAndTime(task: Task): String {
+private fun getDueDateAndTime(plan: Plan): String {
   val stringBuilder = StringBuilder("")
 
-  if (task.hasDueDate()) {
-    stringBuilder.append(task.dueDate)
+  if (plan.hasDueDate()) {
+    stringBuilder.append(plan.dueDate)
     stringBuilder.append(" ")
   }
 
-  if (task.hasDueTime()) {
+  if (plan.hasDueTime()) {
     stringBuilder.append("at ")
-    stringBuilder.append(task.dueTime)
+    stringBuilder.append(plan.dueTime)
   }
 
   return stringBuilder.toString()

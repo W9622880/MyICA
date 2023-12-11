@@ -30,10 +30,10 @@ class ConfigurationServiceImpl @Inject constructor() : ConfigurationService {
   }
 
   override val isShowTaskEditButtonConfig: Boolean
-    get() = remoteConfig[SHOW_TASK_EDIT_BUTTON_KEY].asBoolean()
+    get() = remoteConfig[SHOW_PLAN_EDIT_BUTTON_KEY].asBoolean()
 
   companion object {
-    private const val SHOW_TASK_EDIT_BUTTON_KEY = "show_task_edit_button"
+    private const val SHOW_PLAN_EDIT_BUTTON_KEY = "show_plan_edit_button"
     private const val FETCH_CONFIG_TRACE = "fetchConfig"
   }
 }

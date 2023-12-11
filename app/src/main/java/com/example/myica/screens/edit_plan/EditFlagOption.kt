@@ -1,4 +1,4 @@
-package com.example.myica.screens.edit_task
+package com.example.myica.screens.edit_plan
 
 enum class EditFlagOption {
     On,
